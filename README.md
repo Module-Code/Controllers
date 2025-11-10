@@ -3,11 +3,11 @@ flowchart LR
   %% Left column (types / combinations)
   subgraph LEFT["Left: Controller types / options"]
     direction TB
-    NR[Non-Rigidbody<br/>(Transform / CharacterController / NavMeshAgent)]
-    SC[Static Collider<br/>(no Rigidbody)]
-    DR[Dynamic Rigidbody<br/>(non-kinematic)]
-    KR[Kinematic Rigidbody<br/>(isKinematic = true)]
-    COMB[Combinations<br/>(Dynamic↔Dynamic, Dynamic↔Kinematic, Kinematic↔Kinematic)]
+    NR["Non-Rigidbody\n(Transform / CharacterController / NavMeshAgent)"]
+    SC["Static Collider\n(no Rigidbody)"]
+    DR["Dynamic Rigidbody\n(non-kinematic)"]
+    KR["Kinematic Rigidbody\n(isKinematic = true)"]
+    COMB["Combinations\n(Dynamic↔Dynamic, Dynamic↔Kinematic, Kinematic↔Kinematic)"]
   end
 
   %% Middle column (movement / scripting approaches)
