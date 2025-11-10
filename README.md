@@ -1,35 +1,33 @@
 ```mermaid
 flowchart LR
-  %% Left column (types / combinations)
+  %% Left column (types / options) - tightened order to reduce link bends
   subgraph LEFT["Left: Controller types / options"]
     direction TB
     NR["Non-Rigidbody
 (Transform / CharacterController / NavMeshAgent)"]
     SC["Static Collider
 (no Rigidbody)"]
-    DR["Dynamic Rigidbody
-(non-kinematic)"]
     KR["Kinematic Rigidbody
 (isKinematic = true)"]
-    COMB["Combinations
-(Dynamic<->Dynamic, Dynamic<->Kinematic, Kinematic<->Kinematic)"]
+    DR["Dynamic Rigidbody
+(non-kinematic)"]
   end
 
-  %% Middle column (movement / scripting approaches)
+  %% Middle column (movement / scripting approaches) - reordered for direct links
   subgraph MIDDLE["Middle: Movement approaches / scripting options"]
     direction TB
     TM["Transform.position / direct set"]
     CC["CharacterController.Move"]
     NM["NavMeshAgent movement"]
+    PRT["Parenting / animated transforms"]
+    RBCOLL["Raycast-based movement / manual collision handling"]
     RM["Rigidbody.MovePosition / MoveRotation"]
     RA["Rigidbody.AddForce / set velocity / impulses"]
     STK["Joints and Constraints
 (FixedJoint, Hinge, etc.)"]
-    PRT["Parenting / animated transforms"]
-    RBCOLL["Raycast-based movement / manual collision handling"]
   end
 
-  %% Right column (rules of thumb)
+  %% Right column (rules of thumb) - ordered to align with middle targets
   subgraph RIGHT["Right: Rules of thumb"]
     direction TB
     R10["Avoid moving colliders without a Rigidbody - behavior is unreliable"]
@@ -46,7 +44,7 @@ flowchart LR
     R9["Use triggers for detection only (no physical response)"]
   end
 
-  %% Left -> Middle links (ordered to reduce bends)
+  %% Left -> Middle links (kept left->middle direction)
   NR --> TM
   NR --> CC
   NR --> NM
@@ -56,22 +54,17 @@ flowchart LR
   SC --> TM
   SC --> PRT
 
-  DR --> RA
-  DR --> STK
-  DR --> PRT
-  DR --> RBCOLL
-
   KR --> RM
   KR --> TM
   KR --> PRT
   KR --> RBCOLL
 
-  COMB --> RA
-  COMB --> RM
-  COMB --> TM
-  COMB --> STK
+  DR --> RA
+  DR --> STK
+  DR --> PRT
+  DR --> RBCOLL
 
-  %% Middle -> Right links (ordered to reduce crossing / turning)
+  %% Middle -> Right links (kept middle->right direction)
   TM --> R10
   TM --> R2
   TM --> R5
@@ -83,6 +76,13 @@ flowchart LR
   NM --> R12
   NM --> R10
   NM --> R8
+
+  PRT --> R10
+  PRT --> R5
+
+  RBCOLL --> R8
+  RBCOLL --> R9
+  RBCOLL --> R1
 
   RM --> R3
   RM --> R1
@@ -97,19 +97,12 @@ flowchart LR
   STK --> R7
   STK --> R1
 
-  PRT --> R10
-  PRT --> R5
-
-  RBCOLL --> R8
-  RBCOLL --> R9
-  RBCOLL --> R1
-
   %% Visual grouping hints
   classDef leftCol fill:#f8f9fa,stroke:#333,stroke-width:1px;
   classDef midCol fill:#f0f7ff,stroke:#333,stroke-width:1px;
   classDef rightCol fill:#f7fff0,stroke:#333,stroke-width:1px;
 
-  class NR,SC,DR,KR,COMB leftCol;
-  class TM,CC,NM,RM,RA,STK,PRT,RBCOLL midCol;
+  class NR,SC,KR,DR leftCol;
+  class TM,CC,NM,PRT,RBCOLL,RM,RA,STK midCol;
   class R1,R2,R3,R4,R5,R6,R7,R8,R9,R10,R11,R12 rightCol;
 ```
