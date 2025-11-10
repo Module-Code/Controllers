@@ -14,24 +14,16 @@ flowchart LR
 (non-kinematic)"]
   end
 
-  %% Middle column (movement / scripting approaches) - include invisible anchors to guide entry points
+  %% Middle column (movement / scripting approaches)
   subgraph MIDDLE["Middle: Movement approaches / scripting options"]
     direction TB
-    a_TM["."]
     TM["Transform.position / direct set"]
-    a_CC["."]
     CC["CharacterController.Move"]
-    a_NM["."]
     NM["NavMeshAgent movement"]
-    a_PRT["."]
     PRT["Parenting / animated transforms"]
-    a_RBCOLL["."]
     RBCOLL["Raycast-based movement / manual collision handling"]
-    a_RM["."]
     RM["Rigidbody.MovePosition / MoveRotation"]
-    a_RA["."]
     RA["Rigidbody.AddForce / set velocity / impulses"]
-    a_STK["."]
     STK["Joints and Constraints
 (FixedJoint, Hinge, etc.)"]
   end
@@ -53,41 +45,27 @@ flowchart LR
     R9["Use triggers for detection only (no physical response)"]
   end
 
-  %% Style: hide anchor nodes (make them invisible and tiny)
-  classDef invisible fill:transparent,stroke:transparent,color:transparent,font-size:1px;
-  class a_TM,a_CC,a_NM,a_PRT,a_RBCOLL,a_RM,a_RA,a_STK invisible;
+  %% Left -> Middle links (direct, left->middle)
+  NR --> TM
+  NR --> CC
+  NR --> NM
+  NR --> PRT
+  NR --> RBCOLL
 
-  %% Left -> Middle links (routed through anchors to encourage corner-like entry)
-  NR --> a_TM
-  NR --> a_CC
-  NR --> a_NM
-  NR --> a_PRT
-  NR --> a_RBCOLL
+  SC --> TM
+  SC --> PRT
 
-  SC --> a_TM
-  SC --> a_PRT
+  KR --> RM
+  KR --> TM
+  KR --> PRT
+  KR --> RBCOLL
 
-  KR --> a_RM
-  KR --> a_TM
-  KR --> a_PRT
-  KR --> a_RBCOLL
+  DR --> RA
+  DR --> STK
+  DR --> PRT
+  DR --> RBCOLL
 
-  DR --> a_RA
-  DR --> a_STK
-  DR --> a_PRT
-  DR --> a_RBCOLL
-
-  %% Anchor -> actual middle node (keeps anchor placement just before visible node)
-  a_TM --> TM
-  a_CC --> CC
-  a_NM --> NM
-  a_PRT --> PRT
-  a_RBCOLL --> RBCOLL
-  a_RM --> RM
-  a_RA --> RA
-  a_STK --> STK
-
-  %% Middle -> Right links (kept middle->right direction; straight lines)
+  %% Middle -> Right links (direct, middle->right)
   TM --> R10
   TM --> R2
   TM --> R5
@@ -126,7 +104,6 @@ flowchart LR
   classDef rightCol fill:#f7fff0,stroke:#333,stroke-width:1px;
 
   class NR,SC,KR,DR leftCol;
-  class a_TM,a_CC,a_NM,a_PRT,a_RBCOLL,a_RM,a_RA,a_STK midCol;
   class TM,CC,NM,PRT,RBCOLL,RM,RA,STK midCol;
   class R1,R2,R3,R4,R5,R6,R7,R8,R9,R10,R11,R12 rightCol;
 ```
