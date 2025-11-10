@@ -7,37 +7,37 @@ flowchart LR
     SC["Static Collider\n(no Rigidbody)"]
     DR["Dynamic Rigidbody\n(non-kinematic)"]
     KR["Kinematic Rigidbody\n(isKinematic = true)"]
-    COMB["Combinations\n(Dynamic↔Dynamic, Dynamic↔Kinematic, Kinematic↔Kinematic)"]
+    COMB["Combinations\n(Dynamic<->Dynamic, Dynamic<->Kinematic, Kinematic<->Kinematic)"]
   end
 
   %% Middle column (movement / scripting approaches)
   subgraph MIDDLE["Middle: Movement approaches / scripting options"]
     direction TB
-    TM[Transform.position / direct set]
-    CC[CharacterController.Move]
-    NM[NavMeshAgent movement]
-    RA[Rigidbody.AddForce / set velocity / impulses]
-    RM[Rigidbody.MovePosition / MoveRotation]
+    TM["Transform.position / direct set"]
+    CC["CharacterController.Move"]
+    NM["NavMeshAgent movement"]
+    RA["Rigidbody.AddForce / set velocity / impulses"]
+    RM["Rigidbody.MovePosition / MoveRotation"]
     STK["Joints and Constraints\n(FixedJoint, Hinge, etc.)"]
-    PRT[Parenting / animated transforms]
-    RBCOLL[Raycast-based movement / manual collision handling]
+    PRT["Parenting / animated transforms"]
+    RBCOLL["Raycast-based movement / manual collision handling"]
   end
 
   %% Right column (rules of thumb)
   subgraph RIGHT["Right: Rules of thumb"]
     direction TB
-    R1[Use FixedUpdate for physics operations]
-    R2[Don't set transform on dynamic Rigidbody — use forces/velocity]
-    R3[Use MovePosition/MoveRotation for kinematic motion in FixedUpdate]
-    R4[CharacterController: tight player control; no physics impulses by default]
-    R5[At least one Rigidbody required for reliable OnCollision / OnTrigger callbacks]
-    R6[Use Continuous CD for very fast objects (CPU cost)]
-    R7[Prefer primitive colliders (box/sphere/capsule); use compound shapes]
-    R8[Use physics layers to reduce unnecessary collision checks]
-    R9[Use triggers for detection only (no physical response)]
-    R10[Avoid moving colliders without a Rigidbody — behavior is unreliable]
-    R11[Minimize active dynamics & joint complexity (solver cost)]
-    R12[Kinematic / script-driven movement easier to network & predict]
+    R1["Use FixedUpdate for physics operations"]
+    R2["Don't set transform on dynamic Rigidbody - use forces/velocity"]
+    R3["Use MovePosition/MoveRotation for kinematic motion in FixedUpdate"]
+    R4["CharacterController: tight player control; no physics impulses by default"]
+    R5["At least one Rigidbody required for reliable OnCollision / OnTrigger callbacks"]
+    R6["Use Continuous Collision Detection (CCD) for very fast objects - CPU cost"]
+    R7["Prefer primitive colliders (box/sphere/capsule); use compound shapes"]
+    R8["Use physics layers to reduce unnecessary collision checks"]
+    R9["Use triggers for detection only (no physical response)"]
+    R10["Avoid moving colliders without a Rigidbody - behavior is unreliable"]
+    R11["Minimize active dynamics and joint complexity (solver cost)"]
+    R12["Kinematic / script-driven movement easier to network and predict"]
   end
 
   %% Left -> Middle links (which approaches apply to each left item)
