@@ -18,7 +18,7 @@ flowchart LR
     NM[NavMeshAgent movement]
     RA[Rigidbody.AddForce / set velocity / impulses]
     RM[Rigidbody.MovePosition / MoveRotation]
-    STK[Joints & Constraints (FixedJoint, Hinge, etc.)]
+    STK["Joints and Constraints\n(FixedJoint, Hinge, etc.)"]
     PRT[Parenting / animated transforms]
     RBCOLL[Raycast-based movement / manual collision handling]
   end
