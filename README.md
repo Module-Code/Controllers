@@ -1,6 +1,7 @@
 ```mermaid
+%%{init: {"flowchart": {"curve": "linear", "nodeSpacing": 20, "rankSpacing": 18}}}%%
 flowchart LR
-  %% Left column (types / options) - tightened order to reduce link bends
+  %% Left column (types / options) - tightened and equidistant
   subgraph LEFT["Left: Controller types / options"]
     direction TB
     NR["Non-Rigidbody
@@ -13,7 +14,7 @@ flowchart LR
 (non-kinematic)"]
   end
 
-  %% Middle column (movement / scripting approaches) - reordered for direct links
+  %% Middle column (movement / scripting approaches) - ordered for direct links
   subgraph MIDDLE["Middle: Movement approaches / scripting options"]
     direction TB
     TM["Transform.position / direct set"]
@@ -44,7 +45,7 @@ flowchart LR
     R9["Use triggers for detection only (no physical response)"]
   end
 
-  %% Left -> Middle links (kept left->middle direction)
+  %% Left -> Middle links (kept left->middle direction; ordered to reduce bends)
   NR --> TM
   NR --> CC
   NR --> NM
@@ -64,7 +65,7 @@ flowchart LR
   DR --> PRT
   DR --> RBCOLL
 
-  %% Middle -> Right links (kept middle->right direction)
+  %% Middle -> Right links (kept middle->right direction; straight lines)
   TM --> R10
   TM --> R2
   TM --> R5
