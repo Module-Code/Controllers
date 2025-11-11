@@ -20,8 +20,6 @@ flowchart LR
     TM["Transform.position / direct set"]
     CC["CharacterController.Move"]
     NM["NavMeshAgent movement"]
-    RP["rigidbody.position
-(use sparingly; not for continuous movement)"]
     PRT["Parenting / animated transforms"]
     RBCOLL["Raycast-based movement / manual collision handling"]
     RM["Rigidbody.MovePosition / MoveRotation"]
@@ -67,9 +65,6 @@ flowchart LR
   DR --> PRT
   DR --> RBCOLL
 
-  %% Middle internal relation: NavMesh -> rigidbody.position (caveated)
-  NM --> RP
-
   %% Middle -> Right links (direct, middle->right)
   TM --> R10
   TM --> R2
@@ -109,6 +104,6 @@ flowchart LR
   classDef rightCol fill:#f7fff0,stroke:#333,stroke-width:1px;
 
   class NR,SC,KR,DR leftCol;
-  class TM,CC,NM,RP,PRT,RBCOLL,RM,RA,STK midCol;
+  class TM,CC,NM,PRT,RBCOLL,RM,RA,STK midCol;
   class R1,R2,R3,R4,R5,R6,R7,R8,R9,R10,R11,R12 rightCol;
 ```
